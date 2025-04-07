@@ -25,7 +25,8 @@ public class PdfMerger {
         // Select output file path
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Select Destination for Merged PDF");
-        fileChooser.setSelectedFile(new File("merged.pdf"));
+        //fileChooser.setSelectedFile(new File("merged.pdf"));
+        fileChooser.setSelectedFile(new File("merged_"+System.currentTimeMillis()+".pdf"));
 
         int fileResult = fileChooser.showSaveDialog(null);
         if (fileResult != JFileChooser.APPROVE_OPTION) {
@@ -55,6 +56,9 @@ public class PdfMerger {
             JOptionPane.showMessageDialog(null, "✅ PDFs merged successfully!\nOutput: " + outputFile.getAbsolutePath());
 
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "❌ Error while merging PDFs: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "❌ Error while merging PDFs: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
